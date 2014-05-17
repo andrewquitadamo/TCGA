@@ -25,22 +25,17 @@ foreach(@files)
 		my @temp=split("\t",$_);
 		my $cpgID = $temp[0];
 		my $BethaValue = $temp[1];
-		#print "$temp[1]\n";
 		$cpgID{$cpgID}.="$BethaValue\t";
-		
-		#print $_;
-		#my @temp=split("\t",$_);
-		#print "$temp[0]\n";
-		#$output.= "$temp[1]\n";
 	}
 	close FILE;
 }
-	#print $output;
-	my @keys=keys %cpgID;
-	foreach (@keys)
+
+my @keys=keys %cpgID;
+foreach (@keys)
 {
 	$output.="\n$_\t$cpgID{$_}";
 }
+
 open FILE,">"."Methylation" or die $!;
 print FILE $output;
 close FILE;

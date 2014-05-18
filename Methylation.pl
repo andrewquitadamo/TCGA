@@ -5,8 +5,7 @@ use warnings;
 my %fileID;
 my %cpgID;
 my $output="ID\t";
-my @files;
-@files=glob("*jhu*");
+my @files=glob("*jhu*");
 
 
 foreach(@files)

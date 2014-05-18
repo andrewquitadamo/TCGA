@@ -9,8 +9,7 @@ my $filename = "fileID";
 my %fileID;
 my %geneID;
 my $output="ID\t";
-my @files;
-@files=glob("*genes*");
+my @files=glob("*genes*");
 
 open(FILE,$filename) || die "Can't open file $filename";
 while (<FILE>)

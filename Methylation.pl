@@ -7,24 +7,35 @@ my %cpgID;
 my $output="ID\t";
 my @files=glob("*jhu*");
 
+sub id
+{
+    #print "$_[0]\n";
+    my @temp=split("-",$_);
+	my $indID=$temp[4];
+	$output.="$indID\t";
+}
+
+sub parse
+{
+    $_=$_[0];
+    my @temp=split("\t",$_);
+    my $cpgID = $temp[0];
+    my $BethaValue = $temp[1];
+    $cpgID{$cpgID}.="$BethaValue\t";
+}
 
 foreach(@files)
 {
-	my @temp=split("-",$_);
-	my $indID=$temp[4];
-	$output.="$indID\t";
+    id($_);
 	open(FILE,$_) || die "Can't open file $_";
 	while (<FILE>)
-	{       
-		chomp;	
-		if(($_=~/^Hy/) || ($_=~/^Comp/))
-		{
-			next;
-		}
-		my @temp=split("\t",$_);
-		my $cpgID = $temp[0];
-		my $BethaValue = $temp[1];
-		$cpgID{$cpgID}.="$BethaValue\t";
+	{
+        chomp;
+        if(($_=~/^Hy/) || ($_=~/^Comp/))
+        {
+            next;
+        }
+        parse($_);
 	}
 	close FILE;
 }

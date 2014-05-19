@@ -4,21 +4,36 @@ use warnings;
 
 #ACJ 051514
 
-
 my $filename = "fileID";
 my %fileID;
 my %geneID;
 my $output="ID\t";
 my @files=glob("*genes\.norm*");
 
-open(FILE,$filename) || die "Can't open file $filename";
-while (<FILE>)
-{       
-	my @temp=split("\t",$_);
+sub id
+{
+    my @temp=split("\t",$_[0]);
 	my $file = $temp[0];
 	my @ID = split("-",$temp[1]);
 	my $ID = $ID[2];
 	$fileID{$file}=$ID;
+}
+
+sub parse
+{
+    my @temp=split("\t",$_[0]);
+    my $geneID = $temp[0];
+    my $normCount = $temp[1];
+    my @ID = split(/\|/,$geneID);
+    $geneID = "";
+    $geneID = $ID[1];
+    $geneID{$geneID}.="$normCount\t";
+}
+
+open(FILE,$filename) || die "Can't open file $filename";
+while (<FILE>)
+{       
+    id($_);
 }
 
 foreach(@files)
@@ -32,13 +47,7 @@ foreach(@files)
 		{
 			next;
 		}
-		my @temp=split("\t",$_);
-		my $geneID = $temp[0];
-		my $normCount = $temp[1];
-		my @ID = split(/\|/,$geneID);
-		$geneID = "";
-		$geneID = $ID[1];
-		$geneID{$geneID}.="$normCount\t";
+        parse($_);
 	}
 	close FILE;
 }

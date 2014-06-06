@@ -47,7 +47,10 @@ close FILE;
 
 foreach(@ids)
 {
-	$output.=$chrom_id{$_};
+	if (exists $chrom_id{$_})
+	{
+		$output.=$chrom_id{$_};
+	}
 }
 
 open FILE,">"."chr" . $chr ."_expr_pos" or die $!;

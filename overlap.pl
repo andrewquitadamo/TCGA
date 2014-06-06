@@ -2,8 +2,11 @@
 use strict;
 use warnings;
 
-my $methylation_file = "chr20_meth_pos";
-my $expression_file = "chr20_expr_pos";
+#my $methylation_file = "chr1_meth_pos";
+#my $expression_file = "chr1_expr_pos";
+
+my $methylation_file = $ARGV[0];
+my $expression_file = $ARGV[1];
 
 my %meth_id;
 my %expr_id;
@@ -79,10 +82,10 @@ while(<FILE>)
 }
 close FILE;
 
-open FILE, ">". "meth_output" or die $!;
+open FILE, ">". $methylation_file . ".out" or die $!;
 print FILE $meth_output;
 close FILE;
 
-open FILE, ">". "expr_output" or die $!;
+open FILE, ">". $expression_file . ".out" or die $!;
 print FILE $expr_output;
 close FILE;

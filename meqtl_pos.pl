@@ -3,7 +3,6 @@ use strict;
 use warnings;
 
 my $meth_output = "id\tchr\tpos\n";
-
 my $meth_pos_filename = "jhu-usc.edu_TCGA_HumanMethylation27.v2.adf.txt";
 open(FILE,$meth_pos_filename) || die "Can't open file $meth_pos_filename";
 while (<FILE>)
@@ -24,7 +23,6 @@ print FILE $meth_output;
 close FILE;
 
 my $gene_output = "id\tchr\tstart\tend\n";
-
 my %gene_hash;
 
 my $gene_pos_filename = "gene_loc";

@@ -2,9 +2,6 @@
 use strict;
 use warnings;
 
-#my $methylation_file = "chr1_meth_pos";
-#my $expression_file = "chr1_expr_pos";
-
 my $methylation_file = $ARGV[0];
 my $expression_file = $ARGV[1];
 

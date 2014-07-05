@@ -8,7 +8,7 @@ sub parse
 	print "$filename\n";
 	`R --no-save <<RSCRIPT
 	source('~/Development/repos/ZebraFish/expression_sd_filter.r')
-	expr<-expression_filter(0.01,"$ENV{PWD}\/$filename")`;
+	expr<-expression_filter(0.1,"$ENV{PWD}\/$filename")`;
 	`sed '1d' $filename.filter > $filename.filter.noh`;
 	`sed '/NA/d' $filename.filter.noh > $filename.filter.noh.narm`;
 	`cut -f 2- $filename.filter.noh.narm > $filename.final`;
@@ -17,7 +17,6 @@ sub parse
 my $i=0;
 for($i=1; $i<=22; $i++)
 {
-	print "$i\n";
 	`perl meth_pos_extract.pl $i`;
 	`perl gene_pos_extract.pl $i`;
 	my $meth_file = "chr" . $i . "_meth_pos";

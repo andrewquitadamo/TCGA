@@ -22,11 +22,7 @@ open(FILE,$input_file) || die "can't open that $input_file";
 while (<FILE>)
 {
 	chomp;
-	my @temp = split("\t",$_);
-	my $raw_gene = $temp[1];
-	my @gene = split(/\|/, $raw_gene);
-	my $gene = $gene[0];
-	if (exists $dapple_genes{$gene})
+	if (exists $dapple_genes{$_})
 	{
 		print "$_\n";
 	}
